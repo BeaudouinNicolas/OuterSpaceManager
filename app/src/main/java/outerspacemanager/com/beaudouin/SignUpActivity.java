@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.util.HashSet;
-import java.util.Set;
-
+import outerspacemanager.com.beaudouin.models.User;
+import outerspacemanager.com.beaudouin.services.OSMService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

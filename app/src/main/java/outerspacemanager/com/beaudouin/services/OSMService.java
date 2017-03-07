@@ -1,14 +1,14 @@
-package outerspacemanager.com.beaudouin;
+package outerspacemanager.com.beaudouin.services;
 
-import com.google.gson.Gson;
-
+import outerspacemanager.com.beaudouin.models.Building;
+import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.User;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -31,7 +31,7 @@ public interface OSMService {
     Call<User> getCurrentUser(@Header("x-access-token") String token);
 
     @GET("buildings/list")
-    Call<Building> getBuilding(@Header("x-access-token") String token);
+    Call<Buildings> getBuilding(@Header("x-access-token") String token);
 
 
 

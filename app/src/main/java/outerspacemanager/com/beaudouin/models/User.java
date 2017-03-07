@@ -1,4 +1,4 @@
-package outerspacemanager.com.beaudouin;
+package outerspacemanager.com.beaudouin.models;
 
 /**
  * Created by nico on 06/03/17.
