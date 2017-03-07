@@ -2,5 +2,15 @@
     <string name="app_name">Outer Space Manager</string>
     <string name="identifiant">Identifiant</string>
     <string name="password">Mot de passe</string>
-    <string name="confirmed">Valider</string>
+    <string name="signup">Créer compte</string>
+    <string name="login">Connexion</string>
+    <string name="connection_error">Une erreur est survenue lors de la connexion</string>
+
+    <string name="generalView">Vue générale</string>
+    <string name="buildings">Bâtiments</string>
+    <string name="fleet">Flotte</string>
+    <string name="search">Recherches</string>
+    <string name="sheepBuilder">Chantier Spatial</string>
+    <string name="galaxy">Galaxie</string>
+    <string name="logout">Déconnexion</string>
 </resources>

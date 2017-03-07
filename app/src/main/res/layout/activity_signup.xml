@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_signup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#491111"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,64 +13,89 @@
     tools:context="outerspacemanager.com.beaudouin.SignUpActivity">
 
     <EditText
+        android:id="@+id/inputTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/inputTextPassword"
-        android:hint="@string/password"
-        android:layout_below="@+id/inputTextIdentifiant"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/inputTextIdentifiant"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType=""
+        android:password="true"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColorLink="@android:color/white"
+        tools:ignore="Deprecated,TextFields" />
 
     <EditText
+        android:id="@+id/inputTextIdentifiant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/inputTextIdentifiant"
-        android:hint="@string/identifiant"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/identifiant"
+        android:inputType="textPersonName"
+        android:password="false"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColorLink="@android:color/white"
+        tools:ignore="Deprecated" />
 
     <TextView
-        android:text="@string/identifiant"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView"
-        android:layout_toStartOf="@+id/inputTextPassword"
         android:layout_above="@+id/inputTextPassword"
         android:layout_alignBaseline="@+id/inputTextIdentifiant"
-        android:textStyle="normal|bold"
-        android:textSize="18sp" />
-
-    <TextView
-        android:text="@string/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/inputTextPassword"
-        android:layout_toLeftOf="@+id/inputTextPassword"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/inputTextIdentifiant"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textAlignment="textStart"
-        android:layout_alignBaseline="@+id/inputTextPassword"
+        android:layout_alignParentTop="true"
+        android:text="@string/identifiant"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="normal|bold" />
 
-    <Button
-        android:text="@string/confirmed"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/confirmedSignUp"
+        android:layout_alignBaseline="@+id/inputTextPassword"
+        android:layout_alignBottom="@+id/inputTextPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/inputTextIdentifiant"
+        android:layout_toLeftOf="@+id/inputTextPassword"
+        android:text="@string/password"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/confirmedSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/inputTextPassword"
+        android:text="@string/login" />
+
+    <Button
+        android:id="@+id/confirmedSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:layout_below="@+id/confirmedSignIn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
