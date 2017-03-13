@@ -31,7 +31,7 @@ public interface OSMService {
     Call<User> getCurrentUser(@Header("x-access-token") String token);
 
     @GET("buildings/list")
-    Call<Buildings> getBuilding(@Header("x-access-token") String token);
+    Call<Buildings> getBuildings(@Header("x-access-token") String token);
 
 
 

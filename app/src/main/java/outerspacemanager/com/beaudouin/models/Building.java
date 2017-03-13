@@ -17,6 +17,7 @@ public class Building {
     private String name;
     private Integer timeToBuildByLevel;
     private Integer timeToBuildLevel0;
+    private String imageUrl;
 
     public Building() { }
 
@@ -32,6 +33,7 @@ public class Building {
     public String getName() { return this.name; }
     public Integer getTimeToBuildByLevel() { return this.timeToBuildByLevel; }
     public Integer getTimeToBuildLevel0() { return this.timeToBuildLevel0; }
+    public String getImageUrl() { return this.imageUrl; }
 
     public void setAmountOfEffectByLevel(Integer amountOfLevel) { this.amountOfEffectByLevel = amountOfLevel; }
     public void setAmountOfEffectLevel0(Integer amountOf0) { this.amountOfEffectLevel0 = amountOf0; }
@@ -40,11 +42,12 @@ public class Building {
     public void setGasCostByLevel(Integer gasCostLevel) { this.gasCostByLevel = gasCostLevel; }
     public void setGasCostLevel0(Integer gasCost0) { this.gasCostLevel0 = gasCost0; }
     public void setLevel(Integer level) { this.level = level; }
-    public void setMineralCostByLevel(Integer mineralCostLevel) { this.gasCostByLevel = mineralCostLevel; }
-    public void setMineralCostLevel0(Integer mineralCost0) { this.gasCostLevel0 = mineralCost0; }
+    public void setMineralCostByLevel(Integer mineralCostLevel) { this.mineralCostByLevel = mineralCostLevel; }
+    public void setMineralCostLevel0(Integer mineralCost0) { this.mineralCostLevel0 = mineralCost0; }
     public void setName(String name) { this.name = name; }
     public void setTimeToBuildByLevel(Integer timeBuildLevel) { this.timeToBuildByLevel = timeBuildLevel; }
     public void setTimeToBuildLevel0(Integer timeBuild0) { this.timeToBuildLevel0 = timeBuild0; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
 
 

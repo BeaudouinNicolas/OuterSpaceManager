@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF1D1D"
+    android:background="#343B4A"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/buildingContainer">
 
     <TextView
         android:id="@+id/buildingName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         tools:ignore="HardcodedText" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/mineralCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UselessLeaf">
+        android:textColor="@android:color/white"
+        tools:ignore="HardcodedText" />
 
-        <TextView
-            android:id="@+id/mineralCost"
-            android:layout_width="192dp"
-            android:layout_height="wrap_content"
-            android:text="Mineral cost"
-            android:textColor="@android:color/white"
-            tools:ignore="HardcodedText" />
+    <TextView
+        android:id="@+id/gasCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        tools:ignore="HardcodedText" />
 
-        <TextView
-            android:id="@+id/gasCost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gas cost"
-            android:textColor="@android:color/white"
-            tools:ignore="HardcodedText" />
+    <TextView
+        android:id="@+id/buildingEffect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/timeToBuild"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

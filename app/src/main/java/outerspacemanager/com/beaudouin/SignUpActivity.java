@@ -38,6 +38,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         confirmedSignIn.setOnClickListener(this);
         confirmedSignUp.setOnClickListener(this);
 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        if(settings.contains("userToken")) {
+            Intent goToMenu = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(goToMenu);
+        }
+
     }
 
     @Override

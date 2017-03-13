@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#491111"
-    tools:context="outerspacemanager.com.beaudouin.BuildingActivity">
+    android:background="#131B2D"
+    tools:context="outerspacemanager.com.beaudouin.BuildingsActivity">
 
     <ListView
         android:id="@+id/buildingsListView"

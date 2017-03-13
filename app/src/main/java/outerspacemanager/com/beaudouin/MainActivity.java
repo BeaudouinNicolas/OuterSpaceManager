@@ -19,7 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView currentUsername;
     private TextView currentUserPoints;
+    private TextView currentUserMinerals;
+    private TextView currentUserGas;
     private Button buildings;
+    private Button logout;
 
     private OSMService osmService = OSMService.retrofit.create(OSMService.class);
     private static final String PREFS_NAME = "PreferencesFile";
@@ -31,9 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         currentUsername = (TextView)findViewById(R.id.currentUsername);
         currentUserPoints = (TextView)findViewById(R.id.currentUserPoints);
+        currentUserMinerals = (TextView)findViewById(R.id.userMinerals);
+        currentUserGas = (TextView)findViewById(R.id.userGas);
         buildings = (Button)findViewById(R.id.buildings);
+        logout = (Button)findViewById(R.id.logout);
 
         buildings.setOnClickListener(this);
+        logout.setOnClickListener(this);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Call<User> currentUser = osmService.getCurrentUser(settings.getString("userToken", ""));
@@ -42,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<User> call, Response<User> response) {
                 currentUsername.setText(response.body().getUsername());
                 currentUserPoints.setText("Points : " + response.body().getPoints().toString());
+                currentUserMinerals.setText(response.body().getMinerals().toString() + " : ");
+                currentUserGas.setText(" : " + response.body().getGas().toString());
             }
 
             @Override
@@ -57,8 +66,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buildings:
-                Intent goToBuilding = new Intent(getApplicationContext(), BuildingActivity.class);
+                Intent goToBuilding = new Intent(getApplicationContext(), BuildingsActivity.class);
                 startActivity(goToBuilding);
+                break;
+            case R.id.logout:
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.remove("userToken");
+                editor.commit();
+
+                Intent goToSignUp = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(goToSignUp);
                 break;
         }
     }
