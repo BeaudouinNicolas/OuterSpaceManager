@@ -13,4 +13,10 @@
     <string name="sheepBuilder">Chantier Spatial</string>
     <string name="galaxy">Galaxie</string>
     <string name="logout">Déconnexion</string>
+
+    <string name="mineralsCost">Minerais : %1$f</string>
+    <string name="gasCost">Gaz : %1$f</string>
+    <string name="buildingEffect">Effect : %1$s</string>
+    <string name="timeToBuild">Durée : %1$d</string>
+    <string name="levelUpBuilding">Augmenter niveau</string>
 </resources>

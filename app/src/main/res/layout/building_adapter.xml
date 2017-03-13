@@ -1,47 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/buildingContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#343B4A"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:id="@+id/buildingContainer">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/buildingName"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="buildingName"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/mineralCost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        tools:ignore="HardcodedText" />
+    <ImageView
+        android:id="@+id/buildingImage"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buildingName"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/gasCost"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        tools:ignore="HardcodedText" />
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        tools:ignore="ObsoleteLayoutParam,UselessParent"
+        android:layout_below="@+id/buildingName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/buildingImage"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/mineralCost"
+            android:layout_width="118dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/white"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            app:srcCompat="@mipmap/minerals"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
+            app:srcCompat="@mipmap/gas"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/gasCost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/buildingEffect"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/buildingImage"
+        android:paddingLeft="25dp"
+        android:text="buildingEffect"
+        android:textColor="@android:color/white"
+        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
 
     <TextView
         android:id="@+id/timeToBuild"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white" />
+        android:layout_alignBottom="@+id/buildingImage"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/buildingEffect"
+        android:layout_toRightOf="@+id/buildingImage"
+        android:paddingLeft="25dp"
+        android:text="timeToBuild"
+        android:textColor="@android:color/white"
+        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/buldingLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/buildingName"
+        android:textAlignment="center"
+        android:textColor="#CC0000"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/levelUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buildingImage"
+        android:text="@string/levelUpBuilding" />
+
+</RelativeLayout>

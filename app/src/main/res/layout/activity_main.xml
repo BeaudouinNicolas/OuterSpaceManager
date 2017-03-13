@@ -62,12 +62,12 @@
                     app:srcCompat="@mipmap/minerals"
                     tools:ignore="ContentDescription" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@mipmap/gas"
-                    tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@mipmap/gas"
+                tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/userGas"
