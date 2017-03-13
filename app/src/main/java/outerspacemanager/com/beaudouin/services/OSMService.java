@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by nico on 06/03/17.
@@ -32,7 +33,8 @@ public interface OSMService {
 
     @GET("buildings/list")
     Call<Buildings> getBuildings(@Header("x-access-token") String token);
-
+    @POST("buildings/create/{id}")
+    Call<String> postBuilding(@Path("id") Integer buildingId, @Header("x-access-token") String token);
 
 
 

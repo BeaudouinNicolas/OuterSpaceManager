@@ -58,7 +58,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("An error occurred : ", t.getMessage());
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        Call<User> currentUser = osmService.getCurrentUser(settings.getString("userToken", ""));
+        currentUser.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                currentUsername.setText(response.body().getUsername());
+                currentUserPoints.setText("Points : " + response.body().getPoints().toString());
+                currentUserMinerals.setText(response.body().getMinerals().toString() + " : ");
+                currentUserGas.setText(" : " + response.body().getGas().toString());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("An error occurred : ", t.getMessage());
+            }
+        });
 
     }
 

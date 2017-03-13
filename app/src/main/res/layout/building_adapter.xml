@@ -48,30 +48,14 @@
 
         <TextView
             android:id="@+id/mineralCost"
-            android:layout_width="118dp"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:gravity="center_vertical"
             android:padding="5dp"
-            android:textAlignment="textEnd"
+            android:textAlignment="textStart"
             android:textColor="@android:color/white"
             tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="32dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitStart"
-            app:srcCompat="@mipmap/minerals"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="32dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitStart"
-            app:srcCompat="@mipmap/gas"
-            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/gasCost"
@@ -91,7 +75,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/linearLayout"
         android:layout_toRightOf="@+id/buildingImage"
-        android:paddingLeft="25dp"
+        android:paddingLeft="10dp"
         android:text="buildingEffect"
         android:textColor="@android:color/white"
         tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
@@ -105,7 +89,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/buildingEffect"
         android:layout_toRightOf="@+id/buildingImage"
-        android:paddingLeft="25dp"
+        android:paddingLeft="10dp"
         android:text="timeToBuild"
         android:textColor="@android:color/white"
         tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
@@ -121,7 +105,8 @@
         android:layout_toRightOf="@+id/buildingName"
         android:textAlignment="center"
         android:textColor="#CC0000"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        tools:ignore="RtlHardcoded" />
 
     <Button
         android:id="@+id/levelUp"
