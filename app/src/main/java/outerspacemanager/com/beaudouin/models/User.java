@@ -11,7 +11,7 @@ public final class User {
     private String token;
     private Float gas;
     private Float minerals;
-    private Integer points;
+    private Double points;
 
     public User(String username, String password, String token) {
         this.username = username;
@@ -25,7 +25,7 @@ public final class User {
     public String getToken() { return this.token; }
     public Float getGas() { return this.gas; }
     public Float getMinerals() { return this.minerals; }
-    public Integer getPoints() { return this.points; }
+    public Double getPoints() { return this.points; }
 
     public void setLogin(String newUsername) {
         this.username = newUsername;
@@ -34,18 +34,27 @@ public final class User {
         this.password = newPassword;
     }
     public void setToken(String newToken) { this.token = newToken; }
-    public void setPoints(Integer newPoints) { this.points = newPoints; }
+    public void setPoints(Double newPoints) { this.points = newPoints; }
     public void setGas(Float moarGas) {
-        if(this.gas > 0)
-            this.gas += moarGas;
-        else
+        if(this.gas != null) {
+            if(this.gas > 0)
+                this.gas += moarGas;
+            else
+                this.gas = moarGas;
+        } else {
             this.gas = moarGas;
+        }
     }
     public void setMinerals(Float moarMinerals) {
-        if(this.gas > 0)
-            this.gas += moarMinerals;
-        else
-            this.gas = moarMinerals;
+        if(this.minerals != null) {
+            if(this.minerals > 0)
+                this.minerals += moarMinerals;
+            else
+                this.minerals = moarMinerals;
+        } else {
+            this.minerals = moarMinerals;
+        }
+
     }
 
 

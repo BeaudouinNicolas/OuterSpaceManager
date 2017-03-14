@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#131B2D"
-    tools:context="outerspacemanager.com.beaudouin.BuildingsActivity">
+    tools:context="outerspacemanager.com.beaudouin.buildings.BuildingsActivity">
 
     <ListView
         android:id="@+id/buildingsListView"

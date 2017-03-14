@@ -18,7 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".BuildingsActivity"></activity>
+        <activity android:name=".buildings.BuildingsActivity" />
+        <activity android:name=".galaxy.GalaxyActivity" />
+        <activity android:name=".galaxy.GalaxyAdapter"></activity>
     </application>
 
 </manifest>

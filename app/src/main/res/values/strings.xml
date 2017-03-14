@@ -19,4 +19,6 @@
     <string name="buildingEffect">Effect : %1$s</string>
     <string name="timeToBuild">Durée : %1$d</string>
     <string name="levelUpBuilding">Augmenter niveau</string>
+    <string name="buildinIsBuilding">Le bâtiment est en construction...</string>
+    <string name="notEnough">Pas assez de ressources...</string>
 </resources>

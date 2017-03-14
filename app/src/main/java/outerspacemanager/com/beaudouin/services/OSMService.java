@@ -3,6 +3,7 @@ package outerspacemanager.com.beaudouin.services;
 import outerspacemanager.com.beaudouin.models.Building;
 import outerspacemanager.com.beaudouin.models.Buildings;
 import outerspacemanager.com.beaudouin.models.User;
+import outerspacemanager.com.beaudouin.models.Users;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,19 +24,24 @@ public interface OSMService {
         .addConverterFactory(GsonConverterFactory.create())
         .build();
 
+    // create/login user
     @POST("auth/create")
     Call<User> creatUser(@Body User createUser);
     @POST("auth/login")
     Call<User> loginUser(@Body User loginUser);
 
+    // current user information
     @GET("users/get")
     Call<User> getCurrentUser(@Header("x-access-token") String token);
 
+    // get/create buildings of current user
     @GET("buildings/list")
     Call<Buildings> getBuildings(@Header("x-access-token") String token);
     @POST("buildings/create/{id}")
     Call<String> postBuilding(@Path("id") Integer buildingId, @Header("x-access-token") String token);
 
-
+    // users list in the galaxy
+    @GET("users/0/20")
+    Call<Users> getUsers(@Header("x-access-token") String token);
 
 }

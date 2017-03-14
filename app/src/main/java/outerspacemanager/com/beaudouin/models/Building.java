@@ -1,10 +1,12 @@
 package outerspacemanager.com.beaudouin.models;
 
+import java.io.Serializable;
+
 /**
  * Created by nico on 07/03/17.
  */
 
-public class Building {
+public class Building implements Serializable {
     private Integer id;
     private Double amountOfEffectByLevel;
     private Double amountOfEffectLevel0;
@@ -25,7 +27,7 @@ public class Building {
     public Integer getId() { return this.id; }
     public Double getAmountOfEffectByLevel() { return this.amountOfEffectByLevel; }
     public Double getAmountOfEffectLevel0() { return this.amountOfEffectLevel0; }
-    public Boolean getBuilding() { return this.building; }
+    public Boolean isBuilding() { return this.building; }
     public String getEffect() { return this.effect; }
     public Double getGasCostByLevel() { return this.gasCostByLevel; }
     public Double getGasCostLevel0() { return this.gasCostLevel0; }
@@ -36,7 +38,4 @@ public class Building {
     public Integer getTimeToBuildByLevel() { return this.timeToBuildByLevel; }
     public Integer getTimeToBuildLevel0() { return this.timeToBuildLevel0; }
     public String getImageUrl() { return this.imageUrl; }
-
-
-
 }
