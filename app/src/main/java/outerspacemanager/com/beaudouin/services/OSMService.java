@@ -2,6 +2,8 @@ package outerspacemanager.com.beaudouin.services;
 
 import outerspacemanager.com.beaudouin.models.Building;
 import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.Search;
+import outerspacemanager.com.beaudouin.models.Searches;
 import outerspacemanager.com.beaudouin.models.Ship;
 import outerspacemanager.com.beaudouin.models.Ships;
 import outerspacemanager.com.beaudouin.models.User;
@@ -41,6 +43,11 @@ public interface OSMService {
     Call<Buildings> getBuildings(@Header("x-access-token") String token);
     @POST("buildings/create/{id}")
     Call<Building> postBuilding(@Path("id") Integer buildingId, @Header("x-access-token") String token);
+
+    @GET("searches/list")
+    Call<Searches> getSearches(@Header("x-access-token") String token);
+    @POST("searches/create/{id}")
+    Call<Search> postSearch(@Path("id") Integer search, @Header("x-access-token") String token);
 
     @GET("ships")
     Call<Ships> getShips(@Header("x-access-token") String token);

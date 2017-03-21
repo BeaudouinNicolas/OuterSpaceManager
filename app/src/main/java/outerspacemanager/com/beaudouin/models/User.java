@@ -13,6 +13,7 @@ public final class User {
     private Float minerals;
     private Double points;
 
+    public User() {}
     public User(String username, String password, String token) {
         this.username = username;
         this.password = password;

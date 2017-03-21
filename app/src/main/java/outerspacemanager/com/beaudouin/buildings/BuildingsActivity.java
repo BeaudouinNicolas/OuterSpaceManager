@@ -72,7 +72,7 @@ public class BuildingsActivity extends Activity {
             }
         });
 
-        User currentUser = new User(null, null, null);
+        User currentUser = new User();
         currentUser.setMinerals(Float.parseFloat(getIntent().getStringExtra("USER_MINERALS")));
         currentUser.setGas(Float.parseFloat(getIntent().getStringExtra("USER_GAS")));
         lvBuildings.setAdapter(new BuildingsAdapter(context, buildingList, currentUser));

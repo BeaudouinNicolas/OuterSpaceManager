@@ -14,9 +14,11 @@ import android.widget.Toast;
 import outerspacemanager.com.beaudouin.buildings.BuildingsActivity;
 import outerspacemanager.com.beaudouin.galaxy.GalaxyActivity;
 import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.Searches;
 import outerspacemanager.com.beaudouin.models.Ship;
 import outerspacemanager.com.beaudouin.models.Ships;
 import outerspacemanager.com.beaudouin.models.User;
+import outerspacemanager.com.beaudouin.search.SearchActivity;
 import outerspacemanager.com.beaudouin.services.OSMService;
 import outerspacemanager.com.beaudouin.space_shuttle.SpaceShuttleActivity;
 import retrofit2.Call;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView currentUserMinerals;
     private TextView currentUserGas;
     private Button buildings;
+    private Button searches;
     private Button spaceShuttle;
     private Button galaxy;
     private Button logout;
@@ -49,11 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         currentUserMinerals = (TextView)findViewById(R.id.userMinerals);
         currentUserGas = (TextView)findViewById(R.id.userGas);
         buildings = (Button)findViewById(R.id.buildings);
+        searches = (Button)findViewById(R.id.search);
         spaceShuttle = (Button)findViewById(R.id.spaceShuttle);
         galaxy = (Button)findViewById(R.id.galaxy);
         logout = (Button)findViewById(R.id.logout);
 
         buildings.setOnClickListener(this);
+        searches.setOnClickListener(this);
         spaceShuttle.setOnClickListener(this);
         galaxy.setOnClickListener(this);
         logout.setOnClickListener(this);
@@ -112,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         progressDialog = new ProgressDialogUtil(this);
 
-
         switch(v.getId()) {
             case R.id.buildings:
 
@@ -140,7 +144,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onFailure(Call<Buildings> call, Throwable t) {
                         progressDialog.stop();
-                        Log.e("An error occurred", t.getMessage());
+                        Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                        error.show();
+                    }
+                });
+
+                break;
+            case R.id.search:
+
+                progressDialog.launch();
+                Call<Searches> searchesCall = osmService.getSearches(settings.getString("userToken", ""));
+                searchesCall.enqueue(new Callback<Searches>() {
+                    @Override
+                    public void onResponse(Call<Searches> call, Response<Searches> response) {
+                        progressDialog.stop();
+                        if(response.code() == 200) {
+                            Intent goToSearches = new Intent(getApplicationContext(), SearchActivity.class);
+                            goToSearches.putExtra("SEARCHES_LIST", response.body().getSearches());
+                            goToSearches.putExtra("USER_MINERALS", currentUserMinerals.getText());
+                            goToSearches.putExtra("USER_GAS", currentUserGas.getText());
+
+                            startActivity(goToSearches);
+                        } else {
+                            Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                            error.show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Searches> call, Throwable t) {
+                        progressDialog.stop();
+                        Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                        error.show();
                     }
                 });
 

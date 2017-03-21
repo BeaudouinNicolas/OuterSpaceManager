@@ -27,7 +27,7 @@ public class Search implements Serializable {
     public String getName() { return this.name; }
     public String getEffect() { return this.effect; }
     public Integer getLevel() { return this.level; }
-    public Boolean getBuilding() { return this.building; }
+    public Boolean isBuilding() { return this.building; }
     public Float getAmountOfEffectByLevel() { return this.amountOfEffectByLevel; }
     public Float getAmountOfEffectLevel0() { return this.amountOfEffectLevel0; }
     public Float getGasCostLevel0() { return this.gasCostLevel0; }

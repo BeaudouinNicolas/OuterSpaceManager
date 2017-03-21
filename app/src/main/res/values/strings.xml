@@ -27,4 +27,7 @@
     <string name="shipSpeed">Vitesse :</string>
     <string name="shipTimeToBuild">Durée :</string>
     <string name="createShip">Créer %1$d %2$s !</string>
+
+    <string name="searchEffect">Effet : %1$s</string>
+    <string name="searchTimeTo">Temps de recherche : %1$s sec</string>
 </resources>
