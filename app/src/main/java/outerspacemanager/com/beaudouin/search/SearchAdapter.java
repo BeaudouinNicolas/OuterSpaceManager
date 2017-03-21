@@ -50,7 +50,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         final Search search = searches.get(position);
         holder.searchName.setText(search.getName());
         holder.searchEffect.setText(context.getString(R.string.searchEffect, search.getEffect()));
-        holder.searchLevel.setText(search.getLevel().toString());
+        if(search.getLevel() != null) {
+            holder.searchLevel.setText(search.getLevel().toString());
+        }
 
         if(search.getLevel() == 0) {
             timeToBuild = search.getTimeToBuildLevel0();
