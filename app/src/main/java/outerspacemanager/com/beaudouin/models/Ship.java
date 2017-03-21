@@ -18,6 +18,7 @@ public class Ship implements Serializable {
     private Integer spatioportLevelNeeded;
     private Float speed;
     private Float timeToBuild;
+    private Integer amount;
 
     public Ship() {}
 
@@ -32,5 +33,7 @@ public class Ship implements Serializable {
     public Integer getSpatioportLevelNeeded() { return this.spatioportLevelNeeded; }
     public Float getSpeed() { return this.speed; }
     public Float getTimeToBuild() { return this.timeToBuild; }
+
+    public void setAmount(Integer amount) { this.amount = amount; }
 
 }

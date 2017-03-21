@@ -8,6 +8,8 @@ import java.util.ArrayList;
  */
 
 public class Ships implements Serializable {
+    private Float currentUserMinerals;
+    private Float currentUserGas;
     private Integer size;
     private ArrayList<Ship> ships;
 
@@ -18,6 +20,8 @@ public class Ships implements Serializable {
 
     public Integer getSize() { return this.size; }
     public ArrayList<Ship> getShips() { return this.ships; }
+    public Float getCurrentUserMinerals() { return this.currentUserMinerals; }
+    public Float getCurrentUserGas() { return this.currentUserGas; }
 
 
 }

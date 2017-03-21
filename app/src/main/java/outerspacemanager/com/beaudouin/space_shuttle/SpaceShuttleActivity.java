@@ -36,9 +36,16 @@ public class SpaceShuttleActivity extends AppCompatActivity implements AdapterVi
         if(shipDetailsFrag == null || !shipDetailsFrag.isInLayout()){
             Intent i = new Intent(getApplicationContext(), ShipDetailActivity.class);
             i.putExtra("SHIP_SELECTED", shipListFrag.getShipAt(position));
+            i.putExtra("USER_MINERALS", getIntent().getFloatExtra("USER_MINERALS", 0));
+            i.putExtra("USER_GAS", getIntent().getFloatExtra("USER_GAS", 0));
+
             startActivity(i);
         } else {
-            shipDetailsFrag.fillShipDetail(shipListFrag.getShipAt(position));
+            shipDetailsFrag.fillShipDetail(
+                    shipListFrag.getShipAt(position),
+                    getIntent().getFloatExtra("USER_MINERALS", 0),
+                    getIntent().getFloatExtra("USER_GAS", 0)
+            );
         }
 
 

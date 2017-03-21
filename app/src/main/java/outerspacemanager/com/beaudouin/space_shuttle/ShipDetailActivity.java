@@ -13,9 +13,11 @@ public class ShipDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ship_detail);
         Ship ship = (Ship)getIntent().getSerializableExtra("SHIP_SELECTED");
+        Float userMinerals = getIntent().getFloatExtra("USER_MINERALS", 0);
+        Float userGas = getIntent().getFloatExtra("USER_GAS", 0);
 
         ShipDetailsFragment shipDetailsFrag = (ShipDetailsFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.shipDetailsFrag);
-        shipDetailsFrag.fillShipDetail(ship);
+        shipDetailsFrag.fillShipDetail(ship, userMinerals, userGas);
     }
 }

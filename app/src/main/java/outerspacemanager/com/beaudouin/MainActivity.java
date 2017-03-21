@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(response.code() == 200){
                             Intent goToSpaceShuttle = new Intent(getApplicationContext(), SpaceShuttleActivity.class);
                             goToSpaceShuttle.putExtra("SHIP_LIST", response.body().getShips());
+                            goToSpaceShuttle.putExtra("USER_MINERALS", response.body().getCurrentUserMinerals());
+                            goToSpaceShuttle.putExtra("USER_GAS", response.body().getCurrentUserGas());
 
                             startActivity(goToSpaceShuttle);
                         } else {
