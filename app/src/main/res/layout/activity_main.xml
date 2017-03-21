@@ -46,7 +46,7 @@
 
         <TextView
             android:id="@+id/userMinerals"
-            android:layout_width="175dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:gravity="center_vertical"
@@ -99,11 +99,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/sheepsBuilder"
+        android:layout_below="@+id/spaceShuttle"
         android:text="@string/galaxy" />
 
     <Button
-        android:id="@+id/sheepsBuilder"
+        android:id="@+id/spaceShuttle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#131B2D"
+    tools:context="outerspacemanager.com.beaudouin.space_shuttle.SpaceShuttleActivity">
+
+    <fragment
+        android:id="@+id/shipListFragment"
+        android:name="outerspacemanager.com.beaudouin.space_shuttle.ShipListFragment"
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="RtlHardcoded"
+        tools:layout="@layout/fragment_ships_list" />
+
+    <fragment
+        android:id="@+id/shipDetailsFragment"
+        android:name="outerspacemanager.com.beaudouin.space_shuttle.ShipDetailsFragment"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintLeft_toRightOf="@+id/shipListFragment"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="RtlHardcoded"
+        tools:layout="@layout/fragment_ship_details" />
+</android.support.constraint.ConstraintLayout>

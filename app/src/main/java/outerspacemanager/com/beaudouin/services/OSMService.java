@@ -2,6 +2,7 @@ package outerspacemanager.com.beaudouin.services;
 
 import outerspacemanager.com.beaudouin.models.Building;
 import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.Ships;
 import outerspacemanager.com.beaudouin.models.User;
 import outerspacemanager.com.beaudouin.models.Users;
 import retrofit2.Call;
@@ -38,7 +39,10 @@ public interface OSMService {
     @GET("buildings/list")
     Call<Buildings> getBuildings(@Header("x-access-token") String token);
     @POST("buildings/create/{id}")
-    Call<String> postBuilding(@Path("id") Integer buildingId, @Header("x-access-token") String token);
+    Call<Building> postBuilding(@Path("id") Integer buildingId, @Header("x-access-token") String token);
+
+    @GET("ships")
+    Call<Ships> getShips(@Header("x-access-token") String token);
 
     // users list in the galaxy
     @GET("users/0/20")

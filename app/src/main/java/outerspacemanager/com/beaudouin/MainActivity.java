@@ -12,11 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import outerspacemanager.com.beaudouin.buildings.BuildingsActivity;
-import outerspacemanager.com.beaudouin.buildings.BuildingsAdapter;
 import outerspacemanager.com.beaudouin.galaxy.GalaxyActivity;
 import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.Ship;
+import outerspacemanager.com.beaudouin.models.Ships;
 import outerspacemanager.com.beaudouin.models.User;
 import outerspacemanager.com.beaudouin.services.OSMService;
+import outerspacemanager.com.beaudouin.space_shuttle.SpaceShuttleActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView currentUserMinerals;
     private TextView currentUserGas;
     private Button buildings;
+    private Button spaceShuttle;
     private Button galaxy;
     private Button logout;
 
@@ -45,10 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         currentUserMinerals = (TextView)findViewById(R.id.userMinerals);
         currentUserGas = (TextView)findViewById(R.id.userGas);
         buildings = (Button)findViewById(R.id.buildings);
+        spaceShuttle = (Button)findViewById(R.id.spaceShuttle);
         galaxy = (Button)findViewById(R.id.galaxy);
         logout = (Button)findViewById(R.id.logout);
 
         buildings.setOnClickListener(this);
+        spaceShuttle.setOnClickListener(this);
         galaxy.setOnClickListener(this);
         logout.setOnClickListener(this);
 
@@ -126,6 +131,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     @Override
                     public void onFailure(Call<Buildings> call, Throwable t) {
+                        progressDialog.stop();
+                        Log.e("An error occurred", t.getMessage());
+                    }
+                });
+
+                break;
+            case R.id.spaceShuttle:
+
+                progressDialog.launch();
+                Call<Ships> shipsCall = osmService.getShips(settings.getString("userToken", ""));
+                shipsCall.enqueue(new Callback<Ships>() {
+                    @Override
+                    public void onResponse(Call<Ships> call, Response<Ships> response) {
+                        progressDialog.stop();
+                        if(response.code() == 200){
+                            Intent goToSpaceShuttle = new Intent(getApplicationContext(), SpaceShuttleActivity.class);
+                            goToSpaceShuttle.putExtra("SHIP_LIST", response.body().getShips());
+
+                            startActivity(goToSpaceShuttle);
+                        } else {
+                            Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                            error.show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Ships> call, Throwable t) {
+                        progressDialog.stop();
+                        Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                        error.show();
                         Log.e("An error occurred", t.getMessage());
                     }
                 });

@@ -40,9 +40,6 @@ public class BuildingsAdapter extends ArrayAdapter<Building> {
     private final ArrayList<Building> objects;
     private final User currentUser;
 
-    private OSMService osmService = OSMService.retrofit.create(OSMService.class);
-    private static final String PREFS_NAME = "PreferencesFile";
-
     public BuildingsAdapter(@NonNull Context context, @NonNull ArrayList<Building> objects, @NonNull User user) {
         super(context, R.layout.building_adapter, objects);
         this.context = context;
@@ -109,6 +106,7 @@ public class BuildingsAdapter extends ArrayAdapter<Building> {
             levelUp.setBackgroundColor(Color.parseColor("#D98E1E"));
             levelUp.setText(context.getString(R.string.buildinIsBuilding));
         } else {
+            levelUp.setText(context.getString(R.string.levelUpBuilding));
             levelUp.setBackgroundColor(Color.parseColor("#57BA00"));
             levelUp.setHighlightColor(Color.parseColor("#46D91E"));
         }

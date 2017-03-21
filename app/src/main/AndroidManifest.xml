@@ -20,7 +20,14 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".buildings.BuildingsActivity" />
         <activity android:name=".galaxy.GalaxyActivity" />
-        <activity android:name=".galaxy.GalaxyAdapter"></activity>
+        <activity android:name=".galaxy.GalaxyAdapter" />
+        <activity android:name=".fleet.FleetActivity" />
+        <activity android:name=".fleet.FleetAdapter" />
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".search.SearchAdapter" />
+        <activity android:name=".space_shuttle.SpaceShuttleActivity" />
+        <activity android:name=".space_shuttle.ShipsListAdapter" />
+        <activity android:name=".space_shuttle.ShipDetailActivity"></activity>
     </application>
 
 </manifest>

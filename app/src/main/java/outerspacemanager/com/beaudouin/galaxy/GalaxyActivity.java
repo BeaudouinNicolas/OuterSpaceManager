@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import outerspacemanager.com.beaudouin.ProgressDialogUtil;
 import outerspacemanager.com.beaudouin.R;
 import outerspacemanager.com.beaudouin.models.User;
 import outerspacemanager.com.beaudouin.models.Users;
@@ -21,6 +22,7 @@ public class GalaxyActivity extends AppCompatActivity {
 
     private OSMService osmService = OSMService.retrofit.create(OSMService.class);
     private static final String PREFS_NAME = "PreferencesFile";
+    private ProgressDialogUtil progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +31,14 @@ public class GalaxyActivity extends AppCompatActivity {
 
         lvUsers = (ListView)findViewById(R.id.lvUsers);
 
+        progressDialog = new ProgressDialogUtil(this);
+        progressDialog.launch();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Call<Users> usersCall = osmService.getUsers(settings.getString("userToken", ""));
         usersCall.enqueue(new Callback<Users>() {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
-                Log.d("yolo", "yolo");
+                progressDialog.stop();
                 lvUsers.setAdapter(new GalaxyAdapter(getApplicationContext(), response.body().getUsers()));
             }
 

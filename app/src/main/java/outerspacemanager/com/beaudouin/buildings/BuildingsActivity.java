@@ -2,13 +2,16 @@ package outerspacemanager.com.beaudouin.buildings;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -46,21 +49,23 @@ public class BuildingsActivity extends Activity {
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
                 progressDialog.launch();
-                final Call<String> createBuilding = osmService.postBuilding(position, settings.getString("userToken", ""));
-                createBuilding.enqueue(new Callback<String>() {
+                final Call<Building> createBuilding = osmService.postBuilding(position, settings.getString("userToken", ""));
+                createBuilding.enqueue(new Callback<Building>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<Building> call, Response<Building> response) {
                         progressDialog.stop();
                         if(response.code() == 401) {
                             Toast message = Toast.makeText(context, "Impossible pour le moment...", Toast.LENGTH_SHORT);
                             message.show();
                         } else if(response.code() == 200) {
-                            finish();
-                            startActivity(getIntent());
+                            TextView levelUp = (TextView)findViewById(R.id.levelUp);
+                            levelUp.setBackgroundColor(Color.parseColor("#D98E1E"));
+                            levelUp.setText(context.getString(R.string.buildinIsBuilding));
                         }
                     }
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<Building> call, Throwable t) {
+                        progressDialog.stop();
                         Log.e("An error occurred : ", t.getMessage());
                     }
                 });
