@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Context context = this;
 
         currentUsername = (TextView)findViewById(R.id.currentUsername);
         currentUserPoints = (TextView)findViewById(R.id.currentUserPoints);
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         galaxy.setOnClickListener(this);
         logout.setOnClickListener(this);
 
+        progressDialog = new ProgressDialogUtil(this);
+        progressDialog.launch();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Call<User> currentUser = osmService.getCurrentUser(settings.getString("userToken", ""));
         currentUser.enqueue(new Callback<User>() {
@@ -66,11 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currentUserPoints.setText("Points : " + response.body().getPoints().toString());
                 currentUserMinerals.setText(response.body().getMinerals().toString());
                 currentUserGas.setText(response.body().getGas().toString());
+                progressDialog.stop();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e("An error occurred : ", t.getMessage());
+                progressDialog.stop();
+                Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                error.show();
             }
         });
     }
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
+        final Context context = this;
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Call<User> currentUser = osmService.getCurrentUser(settings.getString("userToken", ""));
@@ -92,7 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e("An error occurred : ", t.getMessage());
+                Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                error.show();
             }
         });
 
