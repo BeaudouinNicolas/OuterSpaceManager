@@ -30,4 +30,7 @@
 
     <string name="searchEffect">Effet : %1$s</string>
     <string name="searchTimeTo">Temps de recherche : %1$s sec</string>
+
+    <string name="reportsNameAttacked">Attaqué par %1$s</string>
+    <string name="reportsNameAttacker">Attaque de %1$s</string>
 </resources>

@@ -2,6 +2,7 @@ package outerspacemanager.com.beaudouin.services;
 
 import outerspacemanager.com.beaudouin.models.Building;
 import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.Reports;
 import outerspacemanager.com.beaudouin.models.Search;
 import outerspacemanager.com.beaudouin.models.Searches;
 import outerspacemanager.com.beaudouin.models.Ship;
@@ -37,6 +38,9 @@ public interface OSMService {
     // current user information
     @GET("users/get")
     Call<User> getCurrentUser(@Header("x-access-token") String token);
+
+    @GET("reports/{from}/20")
+    Call<Reports> getReports(@Path("from") Integer from, @Header("x-access-token") String token);
 
     // get/create buildings of current user
     @GET("buildings/list")

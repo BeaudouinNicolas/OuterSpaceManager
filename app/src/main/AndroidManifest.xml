@@ -17,8 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".buildings.BuildingsActivity" />
         <activity android:name=".galaxy.GalaxyActivity" />
         <activity android:name=".fleet.FleetActivity" />
@@ -26,7 +27,9 @@
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".search.SearchAdapter" />
         <activity android:name=".space_shuttle.SpaceShuttleActivity" />
-        <activity android:name=".space_shuttle.ShipDetailActivity"></activity>
+        <activity android:name=".space_shuttle.ShipDetailActivity" />
+        <activity android:name=".reports.ReportsActivity" />
+        <activity android:name=".reports.ReportsAdapter"></activity>
     </application>
 
 </manifest>

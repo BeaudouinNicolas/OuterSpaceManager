@@ -20,11 +20,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     EditText username;
     EditText password;
+    EditText email;
     Button confirmedSignIn;
     Button confirmedSignUp;
 
     public static final String PREFS_NAME = "PreferencesFile";
     OSMService osmService = OSMService.retrofit.create(OSMService.class);
+    private ProgressDialogUtil progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         username = (EditText)findViewById(R.id.inputTextIdentifiant);
         password = (EditText)findViewById(R.id.inputTextPassword);
+        email = (EditText)findViewById(R.id.inputTextEmail);
+
         confirmedSignIn = (Button)findViewById(R.id.confirmedSignIn);
         confirmedSignUp = (Button) findViewById(R.id.confirmedSignUp);
         confirmedSignIn.setOnClickListener(this);
@@ -48,13 +52,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        progressDialog = new ProgressDialogUtil(this);
+        progressDialog.launch();
+
         if(v.getId() == R.id.confirmedSignIn ) {
             Call<User> callUser = osmService.loginUser(
-                    new User(username.getText().toString(), password.getText().toString(), ""));
+                    new User(username.getText().toString(),
+                             password.getText().toString(),
+                             "",
+                             ""));
 
             callUser.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
+                    progressDialog.stop();
                     if(response.code() == 401) {
                         Toast.makeText(getApplicationContext(),
                                 "Une erreur est survenu lors de la connexion",
@@ -73,16 +84,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
+                    progressDialog.stop();
                     Log.e("user login error", t.toString());
                 }
             });
         } else if(v.getId() == R.id.confirmedSignUp) {
             Call<User> createUser = osmService.creatUser(
-                    new User(username.getText().toString(), password.getText().toString(), ""));
+                    new User(username.getText().toString(),
+                            password.getText().toString(),
+                            "",
+                            email.getText().toString()));
 
             createUser.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
+                    progressDialog.stop();
                     if(response.code() == 400) {
                         Toast.makeText(getApplicationContext(),
                                 "Le compte existe déjà appuyé sur Connexion",
@@ -105,6 +121,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
+                    progressDialog.stop();
                     Log.e("create user error", t.toString());
                 }
             });

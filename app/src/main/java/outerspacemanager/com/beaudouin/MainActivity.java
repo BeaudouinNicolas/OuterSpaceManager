@@ -14,10 +14,12 @@ import android.widget.Toast;
 import outerspacemanager.com.beaudouin.buildings.BuildingsActivity;
 import outerspacemanager.com.beaudouin.galaxy.GalaxyActivity;
 import outerspacemanager.com.beaudouin.models.Buildings;
+import outerspacemanager.com.beaudouin.models.Reports;
 import outerspacemanager.com.beaudouin.models.Searches;
 import outerspacemanager.com.beaudouin.models.Ship;
 import outerspacemanager.com.beaudouin.models.Ships;
 import outerspacemanager.com.beaudouin.models.User;
+import outerspacemanager.com.beaudouin.reports.ReportsActivity;
 import outerspacemanager.com.beaudouin.search.SearchActivity;
 import outerspacemanager.com.beaudouin.services.OSMService;
 import outerspacemanager.com.beaudouin.space_shuttle.SpaceShuttleActivity;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView currentUserPoints;
     private TextView currentUserMinerals;
     private TextView currentUserGas;
+    private Button generalView;
     private Button buildings;
     private Button searches;
     private Button spaceShuttle;
@@ -51,12 +54,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         currentUserPoints = (TextView)findViewById(R.id.currentUserPoints);
         currentUserMinerals = (TextView)findViewById(R.id.userMinerals);
         currentUserGas = (TextView)findViewById(R.id.userGas);
+        generalView = (Button)findViewById(R.id.generalView);
         buildings = (Button)findViewById(R.id.buildings);
         searches = (Button)findViewById(R.id.search);
         spaceShuttle = (Button)findViewById(R.id.spaceShuttle);
         galaxy = (Button)findViewById(R.id.galaxy);
         logout = (Button)findViewById(R.id.logout);
 
+        generalView.setOnClickListener(this);
         buildings.setOnClickListener(this);
         searches.setOnClickListener(this);
         spaceShuttle.setOnClickListener(this);
@@ -65,21 +70,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressDialog = new ProgressDialogUtil(this);
         progressDialog.launch();
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        final SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Call<User> currentUser = osmService.getCurrentUser(settings.getString("userToken", ""));
         currentUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                currentUsername.setText(response.body().getUsername());
-                currentUserPoints.setText("Points : " + response.body().getPoints().toString());
-                currentUserMinerals.setText(response.body().getMinerals().toString());
-                currentUserGas.setText(response.body().getGas().toString());
-                progressDialog.stop();
+                if(response.code() == 200) {
+                    currentUsername.setText(response.body().getUsername());
+                    currentUserPoints.setText("Points : " + response.body().getPoints().toString());
+                    currentUserMinerals.setText(response.body().getMinerals().toString());
+                    currentUserGas.setText(response.body().getGas().toString());
+                    progressDialog.stop();
+                } else if(response.code() == 403) {
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.remove("userToken");
+                    editor.commit();
+
+                    Intent goToSignUp = new Intent(getApplicationContext(), SignUpActivity.class);
+                    startActivity(goToSignUp);
+                } else {
+                    Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                    error.show();
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                progressDialog.stop();
                 Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
                 error.show();
             }
@@ -91,15 +107,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         final Context context = this;
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        final SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Call<User> currentUser = osmService.getCurrentUser(settings.getString("userToken", ""));
         currentUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                currentUsername.setText(response.body().getUsername());
-                currentUserPoints.setText("Points : " + response.body().getPoints().toString());
-                currentUserMinerals.setText(response.body().getMinerals().toString());
-                currentUserGas.setText(response.body().getGas().toString());
+                if(response.code() == 200) {
+                    currentUsername.setText(response.body().getUsername());
+                    currentUserPoints.setText("Points : " + response.body().getPoints().toString());
+                    currentUserMinerals.setText(response.body().getMinerals().toString());
+                    currentUserGas.setText(response.body().getGas().toString());
+                    progressDialog.stop();
+                } else if(response.code() == 403) {
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.remove("userToken");
+                    editor.commit();
+
+                    Intent goToSignUp = new Intent(getApplicationContext(), SignUpActivity.class);
+                    startActivity(goToSignUp);
+                } else {
+                    Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                    error.show();
+                }
             }
 
             @Override
@@ -118,6 +147,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog = new ProgressDialogUtil(this);
 
         switch(v.getId()) {
+            case R.id.generalView:
+
+                progressDialog.launch();
+                Call<Reports> reportsCall = osmService.getReports(0, settings.getString("userToken", ""));
+                reportsCall.enqueue(new Callback<Reports>() {
+                    @Override
+                    public void onResponse(Call<Reports> call, Response<Reports> response) {
+                        if(response.code() == 200) {
+                            Intent goToReports = new Intent(getApplicationContext(), ReportsActivity.class);
+                            goToReports.putExtra("USER_REPORTS", response.body().getReports());
+
+                            startActivity(goToReports);
+                        } else {
+                            Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                            error.show();
+                        }
+                        progressDialog.stop();
+                    }
+                    @Override
+                    public void onFailure(Call<Reports> call, Throwable t) {
+                        progressDialog.stop();
+                        Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
+                        error.show();
+                    }
+                });
+
+                break;
             case R.id.buildings:
 
                 progressDialog.launch();
@@ -125,8 +181,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buildingsCall.enqueue(new Callback<Buildings>() {
                     @Override
                     public void onResponse(Call<Buildings> call, Response<Buildings> response) {
-                        // stop the progress bar
-                        progressDialog.stop();
                         if(response.code() == 200) {
                             // create the intent and get all the user buildings
                             Intent goToBuilding = new Intent(getApplicationContext(), BuildingsActivity.class);
@@ -140,6 +194,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
                             error.show();
                         }
+                        // stop the progress bar
+                        progressDialog.stop();
                     }
                     @Override
                     public void onFailure(Call<Buildings> call, Throwable t) {
@@ -157,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 searchesCall.enqueue(new Callback<Searches>() {
                     @Override
                     public void onResponse(Call<Searches> call, Response<Searches> response) {
-                        progressDialog.stop();
                         if(response.code() == 200) {
                             Intent goToSearches = new Intent(getApplicationContext(), SearchActivity.class);
                             goToSearches.putExtra("SEARCHES_LIST", response.body().getSearches());
@@ -169,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
                             error.show();
                         }
+                        progressDialog.stop();
                     }
 
                     @Override
@@ -187,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 shipsCall.enqueue(new Callback<Ships>() {
                     @Override
                     public void onResponse(Call<Ships> call, Response<Ships> response) {
-                        progressDialog.stop();
                         if(response.code() == 200){
                             Intent goToSpaceShuttle = new Intent(getApplicationContext(), SpaceShuttleActivity.class);
                             goToSpaceShuttle.putExtra("SHIP_LIST", response.body().getShips());
@@ -199,6 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast error = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
                             error.show();
                         }
+                        progressDialog.stop();
                     }
 
                     @Override

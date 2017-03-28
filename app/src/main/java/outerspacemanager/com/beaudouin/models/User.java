@@ -8,15 +8,17 @@ public final class User {
 
     private String username;
     private String password;
+    private String email;
     private String token;
     private Float gas;
     private Float minerals;
     private Double points;
 
     public User() {}
-    public User(String username, String password, String token) {
+    public User(String username, String password, String token, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.token = token;
     }
 
@@ -33,6 +35,9 @@ public final class User {
     }
     public void setPassword(String newPassword) {
         this.password = newPassword;
+    }
+    public void setEmail(String newEmail) {
+        this.email = newEmail;
     }
     public void setToken(String newToken) { this.token = newToken; }
     public void setPoints(Double newPoints) { this.points = newPoints; }

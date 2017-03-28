@@ -38,18 +38,17 @@ public class SearchActivity extends AppCompatActivity {
         final Context context = this;
         progressDialog = new ProgressDialogUtil(this);
 
-
         this.searches = (ArrayList<Search>)getIntent().getSerializableExtra("SEARCHES_LIST");
         this.currentUser = new User();
         this.currentUser.setMinerals(Float.parseFloat(getIntent().getStringExtra("USER_MINERALS")));
         this.currentUser.setGas(Float.parseFloat(getIntent().getStringExtra("USER_GAS")));
 
-        SearchAdapter searchAdapter = new SearchAdapter(searches, SearchActivity.this, currentUser);
+        final SearchAdapter searchAdapter = new SearchAdapter(searches, SearchActivity.this, currentUser);
         // make listener on the item click
         searchAdapter.setOnSearchListner(new OnSearchListener() {
             @Override
             public void onSearchListener(Search newSearch) {
-                // Do Retrofit Stuff for making research
+                // Do Retrofit stuff for making research
                 progressDialog.launch();
 
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -62,8 +61,7 @@ public class SearchActivity extends AppCompatActivity {
                         if(response.code() == 200) {
                             Toast message = Toast.makeText(context, "Recherche lancé !", Toast.LENGTH_LONG);
                             message.show();
-                            finish();
-                            startActivity(getIntent());
+                            rvSearches.invalidate();
                         } else {
                             Toast message = Toast.makeText(context, "Une erreur est survenue...", Toast.LENGTH_LONG);
                             message.show();
@@ -84,6 +82,10 @@ public class SearchActivity extends AppCompatActivity {
         this.rvSearches.setLayoutManager(new LinearLayoutManager(this));
 
         this.rvSearches.setAdapter(searchAdapter);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
